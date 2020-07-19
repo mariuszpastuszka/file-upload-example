@@ -39,8 +39,9 @@ public class MyUploadController {
 
     @GetMapping("/all-files")
     public String showAllFilesOnServer(Model model) {
+        // FileUploadController::serveFile
         model.addAttribute(filesKey, storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(MyUploadController.class,
+                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList()));
         return "all-files";
